@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import { db } from "./backend/firebase-config";
 import { collection, getDocs, doc } from "firebase/firestore";
-import "./App.css";
+import TaskList from "./components/TaskList";
+import "./styles/style.css";
+import AddToDo from "./components/AddToDo";
 
 function App() {
   const [tasks, setTasks] = useState([]);
@@ -14,10 +16,13 @@ function App() {
     getTasks();
   }, []);
   return (
-    <div className="App">
-      {tasks.map((task) => {
-        return <div>{task.taskName}</div>;
-      })}
+    <div className="container">
+      <div className="wrapper">
+        <h1 className="title">Todo List App</h1>
+		<hr/>
+        <TaskList tasks={tasks} />
+        <AddToDo />
+      </div>
     </div>
   );
 }

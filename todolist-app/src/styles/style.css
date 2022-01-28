@@ -1,0 +1,72 @@
+.container {
+  background: linear-gradient(to right bottom, #f8edeb, #fdf4ec);
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.wrapper {
+  background-color: #baecfb;
+  min-width: 450px;
+  min-height: 650px;
+  padding: 30px;
+  box-sizing: border-box;
+  border-radius: 10px;
+  box-shadow: 3px 6px 40px #000;
+  margin-bottom: 10px;
+}
+.title {
+  color: #080808;
+  text-align: center;
+  margin: 30px 0;
+}
+.button-edit {
+
+	background-color: #f8edeb;
+	cursor: pointer;
+  margin-left: 30px;
+  height:100%;
+  margin-top: 0px;
+  
+
+}
+
+.button-delete {
+ height:100%;
+  margin-right: 0px;
+  background-color: #f8edeb;
+  padding-top: 0px;
+}
+.task-input {
+  outline: none;
+  width: 260px;
+  padding: 15px;
+  margin-right: 25px;
+  font-size: 20px;
+  color: rgb(105, 99, 99);
+  background-color: #fffffc;
+  border: 1px solid #f8edeb;
+  border-radius: 10px;
+}
+.button-add  {
+  width: 70px;
+  padding: 15px 15px;
+  font-size: 20px;
+  border-radius: 10px;
+  border: 0;
+  background-color: #f8edeb;
+  cursor: pointer;
+}
+
+.list-item {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  margin: 20px 0;
+  border: 1px solid #fffffc;
+  border-radius: 10px;
+  max-height: 40px;
+  padding-left: 10px;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: 1.5rem;
+}
