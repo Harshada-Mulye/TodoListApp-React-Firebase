@@ -16,16 +16,20 @@ function App() {
     };
     getTasks();
     const unSub = onSnapshot(tasksCollectionRef, (snapshot) => {
-		setTasks(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+      setTasks(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     });
     return () => unSub();
   }, []);
+  let countDone = tasks.reduce(function (count, item) {
+    return count + (item["isCompleted"] === true ? 1 : 0);
+  }, 0);
   return (
     <div className="container">
       <div className="wrapper">
         <h1 className="title">Todo List App</h1>
+        {countDone} of {tasks.length} tasks
         <hr />
-        <TaskList tasks={tasks}/>
+        <TaskList tasks={tasks} />
         <AddToDo />
       </div>
     </div>

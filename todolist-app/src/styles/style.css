@@ -75,3 +75,14 @@
 	display: flex;
 	justify-content: space-between;
 }
+
+.list-item h1{
+	font-size: 18px;
+}
+.done{
+	text-decoration: line-through solid red;
+	background-color: darkgreen;
+}
+.undone{
+	background-color: cornflowerblue;
+}
