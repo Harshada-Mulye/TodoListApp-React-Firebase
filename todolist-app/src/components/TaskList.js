@@ -9,7 +9,7 @@ const TaskList = (props) => {
     <div>
       {props.tasks.map((task) => {
         return (
-          <div className="list-item" key={props.id}>
+          <div className="list-item" key={task.id}>
             <div>{task.taskName}</div>
             <div>
               <button className="button-edit task-button">Edit</button>
