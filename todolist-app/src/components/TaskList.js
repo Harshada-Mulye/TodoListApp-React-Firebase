@@ -1,19 +1,23 @@
+import { db } from "../backend/firebase-config";
+import { deleteDoc,doc } from "firebase/firestore";
 const TaskList = (props) => {
-  return (
-    <div key={props.id}>
+	const deleteTask = async (id) => {
+		const taskDoc = doc(db, "todolist", id);
+		await deleteDoc(taskDoc);
+	  };
+  console.log(props.tasks);return (
+    <div>
       {props.tasks.map((task) => {
         return (
-          <div className="list-item">
+          <div className="list-item" key={props.id}>
             <div>{task.taskName}</div>
             <div>
-              <button className="button-edit task-button">
-                Edit
-              </button>
+              <button className="button-edit task-button">Edit</button>
             </div>
             <div>
-              <button className="button-delete task-button">
-               Delete
-              </button>
+              <button className="button-delete task-button"  onClick={() => {
+                deleteTask(task.id);
+              }}>Delete</button>
             </div>
           </div>
         );
