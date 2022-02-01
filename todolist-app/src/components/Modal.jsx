@@ -1,47 +1,38 @@
-import React from "react";
-import { useState } from "react";
-import { db } from "../backend/firebase-config";
-import { doc, updateDoc } from "firebase/firestore";
+import React from 'react'
+import { useState } from 'react'
+import { editTask } from '../backend/api.jsx'
 
 const Modal = (props) => {
-  const [newTask, setNewTask] = useState("");
-  const editTask = async (id, taskName) => {
-    const taskDoc = doc(db, "todolist", id);
-    const newFields = { taskName: newTask };
-    if(newTask!==""){
-       await updateDoc(taskDoc, newFields);
-    }
-   else{
-     alert("Please enter updated task!")
-   }
-  props.closeAction();
-  };
+  const [newTask, setNewTask] = useState('')
+
+  const updateTask = (id, taskName) => {
+    editTask(id, taskName)
+    props.closeAction()
+  }
 
   return (
     <div>
       <input
         name="task"
         type="text"
-       
         placeholder={props.name}
         className="task-input"
         required
         onChange={(event) => {
-          setNewTask(event.target.value);
+          setNewTask(event.target.value)
         }}
       />
       <button
-        className="update" 
-
+        className="update"
         type="submit"
         onClick={() => {
-          editTask(props.id, newTask);
+          updateTask(props.id, newTask)
         }}
       >
         Update
       </button>
     </div>
-  );
-};
+  )
+}
 
-export default Modal;
+export default Modal

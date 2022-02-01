@@ -9,4 +9,20 @@ const deleteTask = async (id) => {
   await deleteDoc(taskDoc)
 }
 
-export default deleteTask
+const toggleStatus = async (id, isCompleted) => {
+  const taskDoc = getTask(id)
+  const newFields = { isCompleted: !isCompleted }
+  await updateDoc(taskDoc, newFields)
+}
+
+const editTask = async (id, taskName, closeAction) => {
+  const taskDoc = getTask(id)
+  const newFields = { taskName: taskName }
+  if (taskName !== '') {
+    await updateDoc(taskDoc, newFields)
+  } else {
+    alert('Please enter updated task!')
+  }
+}
+
+export { deleteTask, toggleStatus, editTask }

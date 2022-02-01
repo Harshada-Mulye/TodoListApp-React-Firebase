@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { db } from './backend/firebase-config'
-import { collection, getDocs, doc, onSnapshot } from 'firebase/firestore'
+import { collection, getDocs, onSnapshot } from 'firebase/firestore'
 import TaskList from './components/TaskList'
 import './styles/style.css'
 import AddToDo from './components/AddToDo'
