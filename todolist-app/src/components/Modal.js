@@ -14,7 +14,7 @@ const Modal = (props) => {
    else{
      alert("Please enter updated task!")
    }
-    window.location.reload();
+  props.closeAction();
   };
 
   return (
@@ -22,7 +22,8 @@ const Modal = (props) => {
       <input
         name="task"
         type="text"
-        placeholder="Enter a Todo..."
+       
+        placeholder={props.name}
         className="task-input"
         required
         onChange={(event) => {
@@ -30,7 +31,8 @@ const Modal = (props) => {
         }}
       />
       <button
-        className="button-add task-button"
+        className="update" 
+
         type="submit"
         onClick={() => {
           editTask(props.id, newTask);

@@ -5,6 +5,7 @@ import Modal from "./Modal.js";
 const TaskList = (props) => {
 	const [isEdit, setIsEdit] = useState(false);
 	const [isOpen, setIsOpen] = useState(false);
+	const [taskToUpdate, setTaskToUpdate] = useState();
 	const [idToUpdate, setidToUpdate] = useState();
 	const deleteTask = async (id) => {
 		const taskDoc = doc(db, "todolist", id);
@@ -15,16 +16,19 @@ const TaskList = (props) => {
 		const newFields = {isCompleted:!isCompleted};
 		await updateDoc(taskDoc,newFields);
 	  };
-	  function openModal(id){
+	  function openModal(id, name){
 		  setIsOpen(true)
 		  setidToUpdate(id)
+		  setTaskToUpdate(name)
 	  }
 
-	  
+	  const closeModal=() => setIsOpen(false);
+
+	  console.log(isOpen);
   return (
     <div>
 			{
-		isOpen?<Modal id={idToUpdate} />:""
+		isOpen && <Modal id={idToUpdate} name={taskToUpdate} closeAction= {closeModal} />
 	}
       {props.tasks.map((task) => {
         return (
@@ -36,7 +40,7 @@ const TaskList = (props) => {
             
             <div>
               <button className="button-edit task-button"  onClick={() => {
-                openModal(task.id);
+                openModal(task.id, task.taskName);
               }}>Edit</button>
             </div>
             <div>
