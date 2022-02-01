@@ -8,7 +8,13 @@ const Modal = (props) => {
   const editTask = async (id, taskName) => {
     const taskDoc = doc(db, "todolist", id);
     const newFields = { taskName: newTask };
-    await updateDoc(taskDoc, newFields);
+    if(newTask!=""){
+       await updateDoc(taskDoc, newFields);
+    }
+   else{
+     alert("Please enter updated task!")
+   }
+    window.location.reload();
   };
 
   return (
@@ -30,7 +36,7 @@ const Modal = (props) => {
           editTask(props.id, newTask);
         }}
       >
-        Edit
+        Update
       </button>
     </div>
   );
