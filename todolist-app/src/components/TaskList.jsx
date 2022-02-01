@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { db } from '../backend/firebase-config'
 import { deleteDoc, doc, updateDoc } from 'firebase/firestore'
-import Modal from './Modal.js'
+import Modal from './Modal.jsx'
 
 const TaskList = (props) => {
   const [isEdit, setIsEdit] = useState(false)
