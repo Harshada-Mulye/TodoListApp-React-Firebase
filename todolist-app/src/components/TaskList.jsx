@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import { db } from '../backend/firebase-config'
-import { deleteDoc, doc, updateDoc } from 'firebase/firestore'
+import { doc, updateDoc } from 'firebase/firestore'
 import Modal from './Modal.jsx'
+import deleteTask from '../backend/api.jsx'
 
 const TaskList = (props) => {
   const [isEdit, setIsEdit] = useState(false)
@@ -9,13 +10,13 @@ const TaskList = (props) => {
   const [taskToUpdate, setTaskToUpdate] = useState()
   const [idToUpdate, setidToUpdate] = useState()
 
-  const deleteTask = async (id) => {
+  /*  const deleteTask = async (id) => {
     const taskDoc = getTask(id);
     await deleteDoc(taskDoc)
-  }
+  } */
 
   const toggleStatus = async (id, isCompleted) => {
-    const taskDoc = getTask(id);
+    const taskDoc = getTask(id)
     const newFields = { isCompleted: !isCompleted }
     await updateDoc(taskDoc, newFields)
   }
@@ -27,7 +28,7 @@ const TaskList = (props) => {
   }
 
   function getTask(id) {
-   return doc(db,'todolist',id);
+    return doc(db, 'todolist', id)
   }
   const closeModal = () => setIsOpen(false)
 
@@ -53,9 +54,7 @@ const TaskList = (props) => {
             <div>
               <button
                 className="button-edit task-button"
-                onClick={() => 
-                  openModal(task.id, task.taskName)
-                }
+                onClick={() => openModal(task.id, task.taskName)}
               >
                 Edit
               </button>

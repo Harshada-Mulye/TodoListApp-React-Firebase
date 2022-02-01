@@ -8,7 +8,7 @@ const Modal = (props) => {
   const editTask = async (id, taskName) => {
     const taskDoc = doc(db, "todolist", id);
     const newFields = { taskName: newTask };
-    if(newTask!=""){
+    if(newTask!==""){
        await updateDoc(taskDoc, newFields);
     }
    else{

@@ -15,9 +15,11 @@ function App() {
       setTasks(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
     }
     getTasks()
+
     const unSub = onSnapshot(tasksCollectionRef, (snapshot) => {
       setTasks(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
     })
+    getTasks()
     return () => unSub()
   }, [])
 
