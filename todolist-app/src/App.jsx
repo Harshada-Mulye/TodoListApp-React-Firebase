@@ -1,25 +1,27 @@
 import { useState, useEffect } from 'react'
 import { db } from './backend/firebase-config'
-import { collection, getDocs, onSnapshot } from 'firebase/firestore'
+import { collection, onSnapshot } from 'firebase/firestore'
 import TaskList from './components/TaskList'
 import './styles/style.css'
 import AddToDo from './components/AddToDo'
+import { getTasks } from './backend/api.jsx'
 
 function App() {
   const [tasks, setTasks] = useState([])
-  const tasksCollectionRef = collection(db, 'todolist')
 
   useEffect(() => {
-    const getTasks = async () => {
-      const data = await getDocs(tasksCollectionRef)
-      setTasks(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
+    const tasksCollectionRef = collection(db, 'todolist')
+
+    async function getData() {
+      let items = await getTasks()
+      setTasks(items)
     }
-    getTasks()
+    getData()
 
     const unSub = onSnapshot(tasksCollectionRef, (snapshot) => {
       setTasks(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
     })
-    getTasks()
+    getData()
     return () => unSub()
   }, [])
 
