@@ -4,7 +4,7 @@ import { collection, onSnapshot } from 'firebase/firestore'
 import TaskList from './components/TaskList'
 import './styles/style.css'
 import AddToDo from './components/AddToDo'
-import { getTasks } from './backend/api.jsx'
+import { getCollection } from './backend/api.js'
 
 function App() {
   const [tasks, setTasks] = useState([])
@@ -12,16 +12,16 @@ function App() {
   useEffect(() => {
     const tasksCollectionRef = collection(db, 'todolist')
 
-    async function getData() {
-      let items = await getTasks()
+    async function getTasks() {
+      const items = await getCollection()
       setTasks(items)
     }
-    getData()
+    getTasks()
 
     const unSub = onSnapshot(tasksCollectionRef, (snapshot) => {
       setTasks(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
     })
-    getData()
+
     return () => unSub()
   }, [])
 

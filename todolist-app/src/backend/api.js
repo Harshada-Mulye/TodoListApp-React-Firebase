@@ -10,16 +10,14 @@ import { db } from './firebase-config'
 function getTask(id) {
   return doc(db, 'todolist', id)
 }
-const getTasks = async () => {
-  let items = []
+const getCollection = async () => {
   const tasksCollectionRef = collection(db, 'todolist')
   const data = await getDocs(tasksCollectionRef)
 
   if (data.empty) {
-    return items
+    return []
   }
-  items = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
-  return items
+  return data.map((doc) => ({ ...doc.data(), id: doc.id }))
 }
 
 const deleteTask = async (id) => {
@@ -33,14 +31,10 @@ const toggleStatus = async (id, isCompleted) => {
   await updateDoc(taskDoc, newFields)
 }
 
-const editTask = async (id, taskName, closeAction) => {
+const editTask = async (id, taskName) => {
   const taskDoc = getTask(id)
   const newFields = { taskName: taskName }
-  if (taskName !== '') {
-    await updateDoc(taskDoc, newFields)
-  } else {
-    alert('Please enter updated task!')
-  }
+  await updateDoc(taskDoc, newFields)
 }
 
-export { deleteTask, toggleStatus, editTask, getTasks }
+export { deleteTask, toggleStatus, editTask, getCollection }

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import Modal from './Modal.jsx'
-import { deleteTask, toggleStatus } from '../backend/api.jsx'
+import { deleteTask, toggleStatus } from '../backend/api.js'
 
 const TaskList = (props) => {
   const [isOpen, setIsOpen] = useState(false)

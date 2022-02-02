@@ -1,12 +1,16 @@
 import React from 'react'
 import { useState } from 'react'
-import { editTask } from '../backend/api.jsx'
+import { editTask } from '../backend/api.js'
 
 const Modal = (props) => {
   const [newTask, setNewTask] = useState('')
 
   const updateTask = (id, taskName) => {
-    editTask(id, taskName)
+    if (taskName !== '') {
+      editTask(id, taskName)
+    } else {
+      alert('Please enter value')
+    }
     props.closeAction()
   }
 
