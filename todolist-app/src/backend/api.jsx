@@ -19,8 +19,6 @@ const getTasks = async () => {
     return items
   }
   items = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
-
-  console.log(items)
   return items
 }
 
